@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Chat 🌸 | En Tiempo Real</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts: Quicksand y Nunito para tipografía dulce, amigable y redondeada -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Contenedor Principal de la Aplicación -->
+    <div class="chat-app">
+        
+        <!-- Cabecera estilo Soft Pastel -->
+        <header class="chat-header">
+            <div class="header-user-info">
+                <div class="avatar-header">
+                    <span>🌸</span>
+                </div>
+                <div class="header-titles">
+                    <h1 class="chat-title">Sweet Chat ✨</h1>
+                    <div class="header-meta">
+                        <!-- Indicador de Red en Tiempo Real -->
+                        <div id="networkStatus" class="status-indicator status-connecting">
+                            <span class="status-dot"></span>
+                            <span id="networkStatusText" class="status-text">Conectando...</span>
+                        </div>
+                        <span class="divider">•</span>
+                        <!-- Contador de usuarios activos -->
+                        <div class="users-count-badge" title="Amiguitos conectados">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                            <span id="userCount">0</span> en línea
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Acciones de Cabecera: Perfil, Sonido y Modo Claro/Oscuro -->
+            <div class="header-actions">
+                <button id="changeUsernameBtn" class="btn-header" title="Cambiar tu apodo">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span id="currentUsernameLabel">Mi Perfil</span>
+                </button>
+
+                <button id="soundToggleBtn" class="btn-header icon-only" title="Silenciar / Activar soniditos" aria-label="Alternar sonido">
+                    <span id="soundIcon">🔔</span>
+                </button>
+
+                <button id="themeToggleBtn" class="btn-header icon-only" title="Alternar modo día / noche" aria-label="Cambiar tema">
+                    <span id="themeIcon">🌙</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Zona de Mensajes con Scroll estilo Soft/Pastel -->
+        <main id="chatMessages" class="chat-messages" aria-live="polite">
+            <!-- Los mensajes recibidos, enviados y del sistema se renderizan aquí dinámicamente -->
+        </main>
+
+        <!-- Indicador de "Escribiendo..." flotante y tierno -->
+        <div id="typingIndicator" class="typing-indicator hidden">
+            <div class="typing-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <span id="typingText" class="typing-text">Alguien está escribiendo...</span>
+        </div>
+
+        <!-- Barra inferior de Envío de Mensajes (Pillow Soft UI) -->
+        <footer class="chat-input-area">
+            <!-- Barra de emojis rápidos y tiernos -->
+            <div class="quick-emojis-bar" aria-label="Emojis tiernos rápidos">
+                <button type="button" class="btn-emoji" data-emoji="🌸" title="Flor de cerezo">🌸</button>
+                <button type="button" class="btn-emoji" data-emoji="💖" title="Corazón brillante">💖</button>
+                <button type="button" class="btn-emoji" data-emoji="✨" title="Estrellitas">✨</button>
+                <button type="button" class="btn-emoji" data-emoji="🥺" title="Por favor">🥺</button>
+                <button type="button" class="btn-emoji" data-emoji="🐱" title="Gatito">🐱</button>
+                <button type="button" class="btn-emoji" data-emoji="🍡" title="Dango dulce">🍡</button>
+                <button type="button" class="btn-emoji" data-emoji="🎀" title="Lazo rosa">🎀</button>
+                <button type="button" class="btn-emoji" data-emoji="🧸" title="Osito">🧸</button>
+            </div>
+
+            <form id="chatForm" class="chat-form" autocomplete="off">
+                <div class="input-wrapper">
+                    <input 
+                        type="text" 
+                        id="messageInput" 
+                        placeholder="Escribe un mensajito dulce aquí... 💬" 
+                        autocomplete="off"
+                        aria-label="Mensaje para el chat"
+                    >
+                    <span id="charCounter" class="char-counter">0 / 500</span>
+                </div>
+                
+                <button type="submit" id="sendBtn" class="btn-send" title="Enviar mensajito" aria-label="Enviar">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                </button>
+            </form>
+        </footer>
+
+    </div>
+
+    <!-- Modal Tierno para Establecer o Cambiar Nombre de Usuario -->
+    <div id="userModal" class="modal-backdrop">
+        <div class="modal-card">
+            <div class="modal-header">
+                <span class="modal-icon">🌸✨</span>
+                <h2 id="modalTitle">¡Bienvenido al Chat! 🎀</h2>
+                <p class="modal-subtitle">Elige un apodo lindo para que tus amigos te reconozcan:</p>
+            </div>
+            <form id="usernameForm" class="modal-form">
+                <div class="modal-input-group">
+                    <input 
+                        type="text" 
+                        id="modalUsernameInput" 
+                        placeholder="Ej. NubeRosa, DulceAna..." 
+                        maxlength="25"
+                        required
+                        autocomplete="nickname"
+                    >
+                </div>
+                <div class="modal-buttons">
+                    <button type="submit" class="btn-primary">¡Comenzar a Chatear! 💖</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notificación Flotante (Toast) Dulce para Alertas -->
+    <div id="toastNotification" class="toast-notification hidden" role="alert"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

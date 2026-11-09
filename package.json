@@ -1,0 +1,19 @@
+{
+  "name": "labwebav-websocketchat",
+  "version": "1.0.0",
+  "description": "WebSocket Server for Chat Application",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Alison Betancourt",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.3.0",
+    "ws": "^8.22.1"
+  }
+}
